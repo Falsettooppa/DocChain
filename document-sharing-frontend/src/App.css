@@ -1,0 +1,141 @@
+/* .app-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.connected-account {
+  font-weight: bold;
+  color: green;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.dapp-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+} */
+/* General App Container Styling */
+/* Global box-sizing to prevent overflow issues */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Ensures padding and borders don't cause overflow */
+}
+
+/* General App Container Styling */
+.app-container {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fb; /* Soft background for the app */
+  padding: 20px;
+  min-height: 100vh; /* Ensures the app takes up the full height of the viewport */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Account Information Styling */
+.connected-account {
+  font-weight: bold;
+  color: #28a745; /* Green colour for connected accounts */
+  font-size: 1.1em;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: #e74c3c; /* A vibrant red for errors */
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Main DApp Sections Container */
+.dapp-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
+  gap: 20px;
+  width: 100%; /* Ensures sections take the full width */
+  max-width: 1200px; /* Centers content for larger screens */
+  padding: 0 10px; /* Prevents content from touching edges */
+  margin: 0 auto; /* Centers the content horizontally */
+}
+
+/* Individual Section Styling */
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #d1d5db;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  overflow: hidden; /* Prevent content overflow */
+  word-wrap: break-word; /* Ensures long text (like document IDs) wraps to the next line */
+}
+
+
+.section:hover {
+  transform: translateY(-3px); /* Slightly raises the section on hover */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15); /* Enhances the shadow */
+}
+
+/* Buttons Styling */
+button {
+  background-color: #007bff; /* Primary button colour */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Input Fields Styling */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d1d5db; /* Light gray border */
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+/* Additional Styling for Error and Success Messages */
+.success-message {
+  color: #28a745; /* Green for success */
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+  .dapp-sections {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .dapp-sections {
+    grid-template-columns: 1fr; /* 1 column for smaller screens */
+  }
+}
+
