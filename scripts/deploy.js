@@ -4,8 +4,21 @@ const fs = require("fs");
 const path = require("path");
 
 async function main() {
-    const web3 = new Web3(process.env.SCROLL_RPC_URL);
-    const privateKey = process.env.PRIVATE_KEY;
+    const rpcUrl = process.env.RPC_URL;
+    const privateKey = process.env.PRIVATE_KEY.startsWith("0x")
+        ? process.env.PRIVATE_KEY
+        : `0x${process.env.PRIVATE_KEY}`;
+
+    if (!rpcUrl) {
+        throw new Error("RPC_URL is missing in .env");
+    }
+
+    if (!process.env.PRIVATE_KEY) {
+        throw new Error("PRIVATE_KEY is missing in .env");
+    }
+
+    const web3 = new Web3(rpcUrl);
+
     const account = web3.eth.accounts.privateKeyToAccount(privateKey);
     web3.eth.accounts.wallet.add(account);
     web3.eth.defaultAccount = account.address;
