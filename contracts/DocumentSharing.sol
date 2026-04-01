@@ -20,10 +20,6 @@ contract DocumentSharing {
     event AccessRevoked(bytes32 indexed docId, address indexed recipient);
     event DocumentDeleted(bytes32 indexed docId);
 
-<<<<<<< HEAD
-=======
-   
->>>>>>> 5790e3a492a910629bcb14e998bb9842d8a17463
     function uploadDocument(string memory name, string memory ipfsHash) public {
         require(bytes(name).length > 0, "Document name cannot be empty");
         require(bytes(ipfsHash).length > 0, "IPFS hash cannot be empty");
@@ -42,10 +38,6 @@ contract DocumentSharing {
         emit DocumentUploaded(docId, name, ipfsHash, msg.sender, block.timestamp);
     }
 
-<<<<<<< HEAD
-=======
-   
->>>>>>> 5790e3a492a910629bcb14e998bb9842d8a17463
     function getDocument(bytes32 docId)
         public
         view
@@ -64,18 +56,11 @@ contract DocumentSharing {
         return (doc.name, doc.ipfsHash, doc.owner, doc.sharedWithArray, doc.timestamp);
     }
 
-<<<<<<< HEAD
     function shareDocument(bytes32 docId, address recipient) public {
         require(recipient != address(0), "Invalid recipient address");
 
         Document storage doc = documents[docId];
         require(bytes(doc.name).length > 0, "Document does not exist");
-=======
-    
-    function shareDocument(bytes32 docId, address recipient) public {
-        require(recipient != address(0), "Invalid recipient address");
-        Document storage doc = documents[docId];
->>>>>>> 5790e3a492a910629bcb14e998bb9842d8a17463
         require(msg.sender == doc.owner, "Only the owner can share the document");
         require(!doc.sharedWith[recipient], "Document already shared with this recipient");
 
@@ -85,7 +70,6 @@ contract DocumentSharing {
         emit DocumentShared(docId, msg.sender, recipient);
     }
 
-<<<<<<< HEAD
     function revokeAccess(bytes32 docId, address recipient) public {
         Document storage doc = documents[docId];
         require(bytes(doc.name).length > 0, "Document does not exist");
@@ -108,10 +92,6 @@ contract DocumentSharing {
     function deleteDocument(bytes32 docId) public {
         Document storage doc = documents[docId];
         require(bytes(doc.name).length > 0, "Document does not exist");
-=======
-    function deleteDocument(bytes32 docId) public {
-        Document storage doc = documents[docId];
->>>>>>> 5790e3a492a910629bcb14e998bb9842d8a17463
         require(msg.sender == doc.owner, "Only the owner can delete the document");
 
         delete documents[docId];
@@ -128,7 +108,6 @@ contract DocumentSharing {
         emit DocumentDeleted(docId);
     }
 
-<<<<<<< HEAD
     function hasAccess(bytes32 docId, address user) public view returns (bool) {
         Document storage doc = documents[docId];
         require(bytes(doc.name).length > 0, "Document does not exist");
@@ -138,17 +117,6 @@ contract DocumentSharing {
     function addTags(bytes32 docId, string[] memory newTags) public {
         Document storage doc = documents[docId];
         require(bytes(doc.name).length > 0, "Document does not exist");
-=======
-   
-    function hasAccess(bytes32 docId, address user) public view returns (bool) {
-        Document storage doc = documents[docId];
-        return user == doc.owner || doc.sharedWith[user];
-    }
-
-   
-    function addTags(bytes32 docId, string[] memory newTags) public {
-        Document storage doc = documents[docId];
->>>>>>> 5790e3a492a910629bcb14e998bb9842d8a17463
         require(msg.sender == doc.owner, "Only the owner can add tags");
 
         for (uint256 i = 0; i < newTags.length; i++) {
@@ -156,7 +124,6 @@ contract DocumentSharing {
         }
     }
 
-<<<<<<< HEAD
     function getDocumentTags(bytes32 docId) public view returns (string[] memory) {
         Document storage doc = documents[docId];
         require(bytes(doc.name).length > 0, "Document does not exist");
@@ -165,9 +132,6 @@ contract DocumentSharing {
         return doc.tags;
     }
 
-=======
-  
->>>>>>> 5790e3a492a910629bcb14e998bb9842d8a17463
     function searchByTag(string memory tag) public view returns (bytes32[] memory docIds) {
         uint256 count = 0;
         bytes32[] memory results = new bytes32[](ownerDocuments[msg.sender].length);
@@ -193,15 +157,7 @@ contract DocumentSharing {
         return filteredResults;
     }
 
-<<<<<<< HEAD
     function getDocumentsByOwner(address owner) public view returns (bytes32[] memory) {
         return ownerDocuments[owner];
     }
 }
-=======
-
-    function getDocumentsByOwner(address owner) public view returns (bytes32[] memory) {
-        return ownerDocuments[owner];
-    }
-}
->>>>>>> 5790e3a492a910629bcb14e998bb9842d8a17463
