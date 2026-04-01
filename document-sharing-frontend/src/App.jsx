@@ -7,10 +7,10 @@ import ShareDocument from "./components/ShareDocument";
 import SharedWithMe from "./components/SharedWithMe";
 import ActivityLog from "./components/ActivityLog";
 import { GetOwnedDocuments } from "./components/DocActions";
-import { DeleteDocument }     from "./components/DocActions";
-import { CheckAccess }        from "./components/DocActions";
-import { AddTags }            from "./components/TagComponents";
-import { SearchByTag }        from "./components/TagComponents";
+import { DeleteDocument } from "./components/DocActions";
+import { CheckAccess } from "./components/DocActions";
+import { AddTags } from "./components/TagComponents";
+import { SearchByTag } from "./components/TagComponents";
 
 const App = () => {
   const [account, setAccount] = useState(null);
@@ -242,7 +242,7 @@ const App = () => {
                 {/* Activity */}
                 <Section title="Activity">
                   <Card title="Activity Log" icon="📋">
-                    <ActivityLog contract={contract} account={account} />
+                    <ActivityLog contract={contract} account={account} web3={web3} />
                   </Card>
                 </Section>
 
