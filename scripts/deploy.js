@@ -25,7 +25,11 @@ async function main() {
 
     console.log("Deploying contract with account:", account.address);
 
-    const contractPath = path.resolve(__dirname, "../artifacts/contracts/DocumentSharing.sol/DocumentSharing.json");
+    const contractPath = path.resolve(
+        __dirname,
+        "../artifacts/contracts/DocumentSharing.sol/DocumentSharing.json"
+    );
+
     const { abi, bytecode } = JSON.parse(fs.readFileSync(contractPath, "utf8"));
 
     const documentSharingContract = new web3.eth.Contract(abi);
@@ -46,15 +50,6 @@ async function main() {
         path.resolve(__dirname, "../contract-address.json"),
         JSON.stringify({ address: deployedContract.options.address }, null, 2)
     );
-    const deployedContract = await documentSharingContract.deploy({ data: bytecode }).send({
-        from: account.address,
-        gas: 3000000,
-        gasPrice: await web3.eth.getGasPrice(),
-    });
-
-    console.log("DocumentSharing contract deployed at:", deployedContract.options.address);
-
-    fs.writeFileSync("./contract-address.json", JSON.stringify({ address: deployedContract.options.address }, null, 2));
 }
 
 main().catch((error) => {
