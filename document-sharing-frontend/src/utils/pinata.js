@@ -10,9 +10,15 @@ export const uploadToPinata = async (file) => {
         throw new Error("No file provided for upload.");
     }
 
-    // Prepare the FormData to send the file
+    const jwt = process.env.REACT_APP_PINATA_JWT;
+    if (!jwt) {
+        throw new Error("Pinata JWT is missing. Check your frontend .env file.");
+    }
+
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("pinataMetadata", JSON.stringify({ name: file.name }));
+    formData.append("pinataOptions", JSON.stringify({ cidVersion: 1 }));
 
     try {
         console.log("Uploading file to Pinata...");
@@ -21,20 +27,18 @@ export const uploadToPinata = async (file) => {
             "https://api.pinata.cloud/pinning/pinFileToIPFS",
             formData,
             {
+                maxBodyLength: Infinity,
                 headers: {
-                    "Content-Type": "multipart/form-data",
-                    pinata_api_key: process.env.REACT_APP_PINATA_API_KEY,
-                    pinata_secret_api_key: process.env.REACT_APP_PINATA_SECRET_API_KEY,
+                    Authorization: `Bearer ${jwt}`,
                 },
             }
         );
 
-        // Extract the IPFS hash from the response
         const ipfsHash = response.data.IpfsHash;
         const ipfsURL = `https://gateway.pinata.cloud/ipfs/${ipfsHash}`;
         console.log("File uploaded to IPFS:", ipfsURL);
 
-        return ipfsURL; // Return the IPFS URL
+        return ipfsURL;
     } catch (error) {
         console.error("Error uploading to Pinata:", error);
         throw new Error("Failed to upload file to Pinata.");
