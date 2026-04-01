@@ -1,6 +1,6 @@
 {
-  "short_name": "DocChain",
-  "name": "DocChain - Blockchain Document Sharing",
+  "short_name": "ChainVault",
+  "name": "ChainVault - Decentralised Document Collaboration",
   "description": "A secure and modern blockchain-based platform for uploading, sharing, and managing documents.",
   "start_url": "/",
   "display": "standalone",

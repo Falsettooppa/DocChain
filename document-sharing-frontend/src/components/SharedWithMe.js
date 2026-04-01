@@ -5,6 +5,23 @@ const SharedWithMe = ({ contract, account }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const formatAddress = (address) =>
+    address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "";
+
+  const formatDate = (timestamp) => {
+    if (!timestamp) return "N/A";
+    return new Date(Number(timestamp) * 1000).toLocaleString();
+  };
+
+  const copyDocId = async (docId) => {
+    try {
+      await navigator.clipboard.writeText(docId);
+      alert("Document ID copied");
+    } catch (error) {
+      console.error("Failed to copy document ID:", error);
+    }
+  };
+
   const loadSharedDocuments = async () => {
     if (!contract || !account) return;
 
@@ -52,14 +69,6 @@ const SharedWithMe = ({ contract, account }) => {
     loadSharedDocuments();
   }, [contract, account]);
 
-  const formatAddress = (address) =>
-    address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "";
-
-  const formatDate = (timestamp) => {
-    if (!timestamp) return "";
-    return new Date(Number(timestamp) * 1000).toLocaleString();
-  };
-
   return (
     <div>
       <button onClick={loadSharedDocuments}>Refresh Shared Documents</button>
@@ -67,22 +76,33 @@ const SharedWithMe = ({ contract, account }) => {
       {loading && <p>Loading shared documents...</p>}
       {error && <p className="error-message">{error}</p>}
 
-      {!loading && documents.length === 0 && <p>No documents have been shared with you yet.</p>}
+      {!loading && !error && documents.length === 0 && (
+        <p>No documents have been shared with you yet.</p>
+      )}
 
       {documents.length > 0 && (
-        <div>
+        <div className="mini-card-list">
           {documents.map((doc) => (
             <div key={doc.docId} className="mini-card">
               <p><strong>Name:</strong> {doc.name}</p>
               <p><strong>Owner:</strong> {formatAddress(doc.owner)}</p>
-              <p><strong>Document ID:</strong> {doc.docId}</p>
               <p><strong>Uploaded:</strong> {formatDate(doc.timestamp)}</p>
-              <p>
-                <strong>IPFS:</strong>{" "}
-                <a href={doc.ipfsHash} target="_blank" rel="noreferrer">
+              <p><strong>Document ID:</strong> {doc.docId}</p>
+
+              <div className="action-row">
+                <button type="button" onClick={() => copyDocId(doc.docId)}>
+                  Copy Document ID
+                </button>
+
+                <a
+                  href={doc.ipfsHash}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="link-button"
+                >
                   View File
                 </a>
-              </p>
+              </div>
             </div>
           ))}
         </div>
