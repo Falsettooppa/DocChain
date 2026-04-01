@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { tw } from "../tw";
 
 const typeConfig = {
@@ -14,7 +14,7 @@ const ActivityLog = ({ contract, account }) => {
 
   const short = (s) => s ? `${s.slice(0, 8)}…${s.slice(-6)}` : "";
 
-  const load = async () => {
+  const load = useCallback(async () => {
     if (!contract || !account) return;
     setLoading(true); setError("");
     try {
@@ -44,7 +44,7 @@ const ActivityLog = ({ contract, account }) => {
       setActivities([...uploads, ...shares, ...deletes].sort((a, b) => b.blockNumber - a.blockNumber));
     } catch { setError("Failed to load activity log."); }
     finally { setLoading(false); }
-  };
+  }, [contract, account]);
 
   useEffect(() => { load(); }, [contract, account, load]);
 

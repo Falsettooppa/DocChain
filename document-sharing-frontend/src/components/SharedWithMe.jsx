@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { tw } from "../tw";
 
 const SharedWithMe = ({ contract, account }) => {
@@ -13,7 +13,7 @@ const SharedWithMe = ({ contract, account }) => {
     try { await navigator.clipboard.writeText(docId); } catch {}
   };
 
-  const load = async () => {
+  const load = useCallback (async () => {
     if (!contract || !account) return;
     setLoading(true); setError("");
     try {
@@ -33,7 +33,7 @@ const SharedWithMe = ({ contract, account }) => {
       setDocuments(docs);
     } catch { setError("Failed to load shared documents."); }
     finally { setLoading(false); }
-  };
+  }, [contract, account]);
 
   useEffect(() => { load(); }, [contract, account, load]);
 
