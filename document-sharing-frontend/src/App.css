@@ -1,141 +1,172 @@
-/* .app-container {
+body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  padding: 20px;
+  background: #f6f8fb;
+  color: #111827;
 }
 
-.connected-account {
-  font-weight: bold;
-  color: green;
-}
-
-.error-message {
-  color: red;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-.dapp-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.section {
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-} */
-/* General App Container Styling */
-/* Global box-sizing to prevent overflow issues */
-*,
-*::before,
-*::after {
-  box-sizing: border-box; /* Ensures padding and borders don't cause overflow */
-}
-
-/* General App Container Styling */
 .app-container {
-  font-family: Arial, sans-serif;
-  background-color: #f4f7fb; /* Soft background for the app */
-  padding: 20px;
-  min-height: 100vh; /* Ensures the app takes up the full height of the viewport */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
 }
 
-/* Account Information Styling */
-.connected-account {
-  font-weight: bold;
-  color: #28a745; /* Green colour for connected accounts */
-  font-size: 1.1em;
-}
-
-/* Error Message Styling */
-.error-message {
-  color: #e74c3c; /* A vibrant red for errors */
-  font-weight: bold;
+.hero {
   text-align: center;
-  margin: 20px 0;
+  margin-bottom: 28px;
 }
 
-/* Main DApp Sections Container */
+.hero h1 {
+  margin: 0 0 10px;
+  font-size: 42px;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: #4b5563;
+  max-width: 760px;
+  margin: 0 auto 18px;
+}
+
+.feature-pills {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.feature-pills span {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+.status-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.status-item {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.status-label {
+  display: block;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #111827;
+}
+
 .dapp-sections {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
-  width: 100%; /* Ensures sections take the full width */
-  max-width: 1200px; /* Centers content for larger screens */
-  padding: 0 10px; /* Prevents content from touching edges */
-  margin: 0 auto; /* Centers the content horizontally */
+  margin-bottom: 20px;
 }
 
-/* Individual Section Styling */
+.single-column {
+  grid-template-columns: 1fr;
+}
+
 .section {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border: 1px solid #d1d5db;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  height: 100%;
-  overflow: hidden; /* Prevent content overflow */
-  word-wrap: break-word; /* Ensures long text (like document IDs) wraps to the next line */
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
 }
 
-
-.section:hover {
-  transform: translateY(-3px); /* Slightly raises the section on hover */
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15); /* Enhances the shadow */
+.section h3 {
+  margin-top: 0;
+  margin-bottom: 14px;
+  font-size: 18px;
 }
 
-/* Buttons Styling */
+.loading-text,
+.error-message {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 16px;
+}
+
+.error-message {
+  color: #b91c1c;
+}
+
+/* General form styling */
+input,
+select,
+textarea,
 button {
-  background-color: #007bff; /* Primary button colour */
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+button {
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  border: none;
+  background: #111827;
+  color: white;
+  font-weight: 600;
 }
 
 button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  opacity: 0.93;
 }
 
-/* Input Fields Styling */
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #d1d5db; /* Light gray border */
-  border-radius: 5px;
-  font-size: 1em;
+a {
+  color: #2563eb;
+  text-decoration: none;
 }
 
-/* Additional Styling for Error and Success Messages */
-.success-message {
-  color: #28a745; /* Green for success */
-  font-weight: bold;
-  margin-top: 10px;
+a:hover {
+  text-decoration: underline;
 }
 
-/* Responsive Design for Smaller Screens */
-@media (max-width: 768px) {
+/* Small cards inside components */
+.mini-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 12px;
+  background: #fafafa;
+  text-align: left;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .status-bar,
   .dapp-sections {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 34px;
   }
 }
-
-@media (max-width: 480px) {
-  .dapp-sections {
-    grid-template-columns: 1fr; /* 1 column for smaller screens */
-  }
-}
-
