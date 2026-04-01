@@ -35,7 +35,7 @@ const SharedWithMe = ({ contract, account }) => {
     finally { setLoading(false); }
   };
 
-  useEffect(() => { load(); }, [contract, account]);
+  useEffect(() => { load(); }, [contract, account, load]);
 
   return (
     <div className="flex flex-col gap-3">
